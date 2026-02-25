@@ -1,3 +1,31 @@
 The first  file to be  added to this repo
 
+import requests
+
+# Location coordinates of IIT Gandhinagar
+latitude = 23.2126
+longitude = 72.6843
+
+# API URL (free weather service)
+url = "https://api.open-meteo.com/v1/forecast?latitude=" + str(latitude) + "&longitude=" + str(longitude) + "&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Kolkata"
+
+# Send request to get weather data
+response = requests.get(url)
+
+# Convert response to JSON format
+data = response.json()
+
+# Extract required information
+dates = data["daily"]["time"]
+max_temp = data["daily"]["temperature_2m_max"]
+min_temp = data["daily"]["temperature_2m_min"]
+
+print("Weather Forecast for IIT Gandhinagar (Next 7 Days)\n")
+
+# Loop through 7 days
+for i in range(7):
+    print("Date:", dates[i])
+    print("Maximum Temperature:", max_temp[i], "°C")
+    print("Minimum Temperature:", min_temp[i], "°C")
+    print("----------------------------")
 
